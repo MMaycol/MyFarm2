@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     input: {
-        height: 42,
+        height: 45,
         margin: 12,
         fontSize: 20,
-        padding: 6,
+        padding: 8,
         backgroundColor: '#e0e0e0',
         borderRadius: 10
       },
