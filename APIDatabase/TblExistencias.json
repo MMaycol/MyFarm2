@@ -1,0 +1,10 @@
+[
+    {
+        "PKExistencias":1,
+        "FKProducto":1,
+        "cantidad_inicial":4,
+        "precio_venta":1.000000000000000e+002,
+        "cantidad_actual":2,
+        "fecha_vencimiento":"2025-06-07"
+    }
+]

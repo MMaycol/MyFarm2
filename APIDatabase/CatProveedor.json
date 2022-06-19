@@ -1,0 +1,10 @@
+[
+ {
+    "PKProveedor":1,
+    "NombreProveedor":"Proveedor 1",
+    "TelefonoProveedor":22232425,
+    "DireccionProveedor":"Frente a la ferreteria jenny una cuadra abajo, Managua",
+    "EmailProveedor":"proveedor1.23@company.com",
+    "EstadoProveedor":true 
+ }
+]

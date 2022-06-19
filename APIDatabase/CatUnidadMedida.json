@@ -1,0 +1,20 @@
+[
+       {  
+        "PKUnidadMedida":1,
+        "NombreUnidadMedida":"Quital",
+        "Abreviacion":"Q",
+        "EstadoUnidadMedida":true 
+        },
+
+        {   "PKUnidadMedida":2,
+            "NombreUnidadMedida":"Libra",
+            "Abreviacion":"Lb",
+            "EstadoUnidadMedida":true 
+        },
+
+        {   "PKUnidadMedida":3,
+            "NombreUnidadMedida":"Kilogramo",
+            "Abreviacion":"Kg",
+            "EstadoUnidadMedida":true
+        }
+]

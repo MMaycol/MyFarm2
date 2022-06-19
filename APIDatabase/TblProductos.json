@@ -1,0 +1,10 @@
+[
+    {
+        "PKProducto":1,
+        "FKCategoria":1,
+        "FKMarca":1,
+        "NombreProducto":"Purina Chicken",
+        "DescripcionProducto":"Purina de engorde",
+        "EstadoProducto":true
+    }
+]
