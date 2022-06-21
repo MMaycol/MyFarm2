@@ -1,0 +1,10 @@
+[
+    {
+        "PKEmpleado":1,
+        "NombreEmpleado":"Marcus Lopez",
+        "DireccionEmpleado":"Direccion pendiente",
+        "TelefonoEmpleado":88909399,
+        "EmailEmpleado":"MarcusLp@gmail.com",
+        "PasswordEmpleado":"1234"
+    }
+]

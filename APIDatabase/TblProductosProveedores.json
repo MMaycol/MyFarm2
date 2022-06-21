@@ -1,0 +1,14 @@
+[
+    {
+        "FKProducto": "1",
+        "PrecioCompra": "0.000",
+        "Descuento": "0.000",
+        "PrecioVenta": "0.000"
+    },
+    {
+        "FKProducto": "2",
+        "PrecioCompra": "0.000",
+        "Descuento": "0.000",
+        "PrecioVenta": "0.000"
+    }
+]

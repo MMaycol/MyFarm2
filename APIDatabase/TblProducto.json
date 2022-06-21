@@ -1,0 +1,18 @@
+[
+    {
+        "PKProducto": "1",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Producto 1",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },
+    {
+        "PKProducto": "2",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Producto 2",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    }
+]

@@ -1,17 +1,17 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //Views 
-import { ExistenciasView } from './ExistenciasView';
+import { StockView } from './StockView';
 
 const Stack = createNativeStackNavigator();
 
-export default function MainExistenciasView() {
+export default function MainStockView() {
 
   return (
       <Stack.Navigator screenOptions = { {
       headerShown: false 
     }}>
-       <Stack.Screen name="ExistenciasView" component={ExistenciasView} />
+       <Stack.Screen name="Stock" component={StockView} />
        
        {/*
         <Stack.Screen name="MatriculadosView" component={MatriculadosView} />

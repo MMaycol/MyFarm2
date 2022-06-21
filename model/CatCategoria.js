@@ -9,9 +9,14 @@ class CatCategoria extends Entity {
         }
       }
 
-      PKCategoria = 1 
-      NombreCategoria = "Categoria 1"
-      Estado = true
+      ApiMethods = {
+        Get: "CatCategorias",
+     } 
+
+    PKCategoria = 1
+    NombreCategoria = "Categoria 1"
+    DetalleCategoria = "Detalle"
+    EstadoCategoria = true
 
 }
 

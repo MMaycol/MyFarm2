@@ -1,9 +1,11 @@
 import React from 'react';
 
 import { StyleSheet, Text, View, Button } from 'react-native';
-//Model
 
-class DetalleExistencias extends React.Component {
+//Model
+import { TblProductoBodega } from '../../model/TblProductoBodega';
+
+class DetalleStock extends React.Component {
     constructor(props) {
         super();
 
@@ -23,10 +25,10 @@ class DetalleExistencias extends React.Component {
             this.state.Dataset.map(m => 
                 <Text style={styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )
         }
-        <Text style={styles.Atribute}>Existencias: {this.data.Existencias}</Text>
-        <Text style={styles.Atribute}>Codigo: {this.data.PKExistencias}</Text>
+        <Text style={styles.Atribute}>Existencias: {this.data.UnidadesExistencias}</Text>
+        <Text style={styles.Atribute}>Codigo: {this.data.FKProducto}</Text>
        <Button title = "Ver Mas" onPress={() => { 				
-            	/* props.CargarBloques(props.data) */
+            	/* props.metodo(props.data) */
             				}}
         			> </Button>
      </View>)
@@ -34,7 +36,7 @@ class DetalleExistencias extends React.Component {
      
     }
     
-     CargarProducto = async (e = (new TblExistencias())) => {
+     CargarProducto = async (e = (new TblProductoBodega())) => {
         const d = await e.TblProductos.get();
     
         this.setState({
@@ -43,7 +45,7 @@ class DetalleExistencias extends React.Component {
     }
 }
 
-export { DetalleExistencias }
+export { DetalleStock }
 
 const styles = StyleSheet.create({
     CardStyle: {

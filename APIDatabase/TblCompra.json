@@ -1,0 +1,11 @@
+[
+    {
+        "PKCompra": "1",
+        "FKProveedor": "1",
+        "Descuento": "0.000",
+        "FechaCompra": "",
+        "Total": "",
+        "IVACompra": "",
+        "EstadoCompra": "1"
+    }
+]

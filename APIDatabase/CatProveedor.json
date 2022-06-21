@@ -1,0 +1,10 @@
+[
+    {
+        "PKProveedor":1,
+        "NombreProveedor":"Granja SA",
+        "TelefonoProveedor":22232824,
+        "DireccionProveedor":"Direccion pendiente",
+        "EmailProveedor":"Contact@migranjasa.com",
+        "EstadoProveedor":true
+    }
+]

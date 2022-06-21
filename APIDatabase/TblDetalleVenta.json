@@ -1,0 +1,10 @@
+[
+    {
+        "PKDetalleVenta": "1",
+        "FKVenta": "1",
+        "UnidadMedida": "",
+        "PKProducto": "1",
+        "Cantidad": "",
+        "SubTotal": ""
+    }
+]

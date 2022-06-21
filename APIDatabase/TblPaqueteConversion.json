@@ -1,0 +1,9 @@
+[
+    {
+        "PKPaqueteConversion": "1",
+        "FKUnidadMedida": "1",
+        "FKUnidadDestino": "2",
+        "Equivalencia": "50",
+        "Estado": "1"
+    }
+]

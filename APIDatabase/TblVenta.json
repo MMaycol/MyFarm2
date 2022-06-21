@@ -1,0 +1,12 @@
+[
+    {
+        "PKVenta": "1",
+        "FKEmpleado": "1",
+        "FechaFactura": "",
+        "DescuentoVenta": "0.000",
+        "IVAVenta": "",
+        "TotalVenta": "",
+        "NombreCliente": "Sin definir",
+        "EstadoVenta": "1"
+    }
+]

@@ -9,9 +9,10 @@ class CatMarca extends Entity {
         }
       }
  
-      NombreMarca = "Marca 1"
-      DetalleMarca = "Alimento seco"
-      EstadoMarca = true
+        PKMarcaProductos = 2
+        NombreMarca = "Marca 1"
+        DetalleMarca = "Detalle 1"
+        EstadoMarca = true
 
 }
 

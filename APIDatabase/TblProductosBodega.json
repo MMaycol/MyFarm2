@@ -1,0 +1,12 @@
+[
+    {
+        "FKProducto": "1",
+        "FKBodega": "1",
+        "UnidadesExistencias": "600"
+    },
+    {
+        "FKProducto": "2",
+        "FKBodega": "1",
+        "UnidadesExistencias": "400"
+    }
+]

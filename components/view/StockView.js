@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, ScrollView, TextInput } from 'react-native';
-
-//Model
-import {TblExistencias} from  '../../model/TblExistencias.js'
+import { TblProductoBodega } from '../../model/TblProductoBodega.js';
 
 //Componentes
-import { DetalleExistencias } from '../utility/DetalleExistencias.js';
+import { DetalleStock } from '../utility/DetalleStock.js';
 
-class ExistenciasView extends React.Component {
+class StockView extends React.Component {
     constructor(props) {
         super();
         this.props = props;
@@ -16,16 +14,16 @@ class ExistenciasView extends React.Component {
             Dataset: []
         }
 
-        this.Existencias = new TblExistencias();
-        this.CargarExistencias();
+        this.TblProductoBodega = new TblProductoBodega();
+        this.CargarStock();
     }
 
-    CargarExistencias = async (param = "") => {
-        const exist = await this.Existencias.Get(param);
+    CargarStock = async (param = "") => {
+        const stock = await this.TblProductoBodega.Get(param);
 
         this.setState({
             isLoading: false,
-            Dataset: exist
+            Dataset: stock
         });
 
     }
@@ -36,19 +34,19 @@ class ExistenciasView extends React.Component {
         return (<ScrollView style={styles.CardStyles}>
             <TextInput style={styles.text_input}
             placeholder='Buscar por codigo'
-            onChangeText={ val => this.CargarExistencias(val)}></TextInput>
+            onChangeText={ val => this.CargarStock(val)}></TextInput>
 
             {this.state.isLoading ?
                 <ActivityIndicator /> :
                 this.state.Dataset.map(
-                    c => <DetalleExistencias
+                    c => <DetalleStock
                      data = { c } />
                 )}
         </ScrollView> )
     }
 }
 
-export { ExistenciasView }
+export { StockView }
 
 const styles = StyleSheet.create({
     CardStyles:{
