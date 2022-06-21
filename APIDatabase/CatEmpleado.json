@@ -6,5 +6,12 @@
         "TelefonoEmpleado":88909399,
         "EmailEmpleado":"MarcusLp@gmail.com",
         "PasswordEmpleado":"1234"
+    },    {
+        "PKEmpleado":2,
+        "NombreEmpleado":"Emilio Guevara",
+        "DireccionEmpleado":"Iglesia Catolica 50vras al este.Los Rincones,Masatepe.",
+        "TelefonoEmpleado":84657348,
+        "EmailEmpleado":"MarcusLp@gmail.com",
+        "PasswordEmpleado":"1234"
     }
 ]

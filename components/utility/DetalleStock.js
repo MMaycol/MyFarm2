@@ -25,7 +25,7 @@ class DetalleStock extends React.Component {
             this.state.Dataset.map(m => 
                 <Text style={styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )
         }
-        <Text style={styles.Atribute}>Existencias: {this.data.UnidadesExistencias}</Text>
+        <Text style={styles.Atribute}>Existencias en Libras: {this.data.UnidadesExistencias}</Text>
         <Text style={styles.Atribute}>Codigo: {this.data.FKProducto}</Text>
        <Button title = "Ver Mas" onPress={() => { 				
             	/* props.metodo(props.data) */

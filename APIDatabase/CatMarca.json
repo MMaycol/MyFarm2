@@ -1,7 +1,37 @@
 [
     {
+        "PKMarcaProductos":1,
+        "NombreMarca":"Inicio",
+        "DetalleMarca":"Detalle 1",
+        "EstadoMarca":true
+    },
+    {
         "PKMarcaProductos":2,
-        "NombreMarca":"Marca 1",
+        "NombreMarca":"Crecimiento",
+        "DetalleMarca":"Detalle 1",
+        "EstadoMarca":true
+    },
+    {
+        "PKMarcaProductos":3,
+        "NombreMarca":"Finalizador",
+        "DetalleMarca":"Detalle 1",
+        "EstadoMarca":true
+    },
+    {
+        "PKMarcaProductos":4,
+        "NombreMarca":"Cachorro",
+        "DetalleMarca":"Detalle 1",
+        "EstadoMarca":true
+    },
+    {
+        "PKMarcaProductos":5,
+        "NombreMarca":"Adulto",
+        "DetalleMarca":"Detalle 1",
+        "EstadoMarca":true
+    },
+    {
+        "PKMarcaProductos":6,
+        "NombreMarca":"Finalizador",
         "DetalleMarca":"Detalle 1",
         "EstadoMarca":true
     }

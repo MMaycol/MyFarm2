@@ -2,6 +2,22 @@
     {
         "PKBodega":1,
         "nombrebodega":"Bodega A",
-        "ubicacion":"Area 2 estante 3"
+        "ubicacion":"Area 1 estante 1"
+    },
+    {
+        "PKBodega":2,
+        "nombrebodega":"Bodega B",
+        "ubicacion":"Area 2 estante 2"
+    }, {
+        "PKBodega":3,
+        "nombrebodega":"Bodega A",
+        "ubicacion":"Area 3 estante 3"
+    },
+    {
+        "PKBodega":4,
+        "nombrebodega":"Bodega B",
+        "ubicacion":"Area 4 estante 4"
     }
+
+
 ]

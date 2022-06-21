@@ -1,8 +1,38 @@
 [
     {
         "PKCategoria":1,
-        "NombreCategoria":"Categoria 1",
+        "NombreCategoria":"Perro",
+        "DetalleCategoria":"Detalle",
+        "EstadoCategoria":true
+    },
+    {
+        "PKCategoria":2,
+        "NombreCategoria":"Gato",
+        "DetalleCategoria":"Detalle",
+        "EstadoCategoria":true
+    },
+    {
+        "PKCategoria":3,
+        "NombreCategoria":"Conejo",
+        "DetalleCategoria":"Detalle",
+        "EstadoCategoria":true
+    } ,{
+        "PKCategoria":4,
+        "NombreCategoria":"Cerdo",
         "DetalleCategoria":"Detalle",
         "EstadoCategoria":true
     }
+    ,
+    {
+        "PKCategoria":5,
+        "NombreCategoria":"Pollo engorde",
+        "DetalleCategoria":"Detalle",
+        "EstadoCategoria":true
+    },
+    {
+        "PKCategoria":6,
+        "NombreCategoria":"Gallina ",
+        "DetalleCategoria":"Detalle",
+        "EstadoCategoria":true
+    } 
 ]

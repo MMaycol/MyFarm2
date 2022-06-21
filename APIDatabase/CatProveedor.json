@@ -1,10 +1,18 @@
 [
     {
         "PKProveedor":1,
-        "NombreProveedor":"Granja SA",
+        "NombreProveedor":"El Granjero SA",
         "TelefonoProveedor":22232824,
-        "DireccionProveedor":"Direccion pendiente",
-        "EmailProveedor":"Contact@migranjasa.com",
+        "DireccionProveedor":"De la estacion de buses 800 metros al sur,Masatepe",
+        "EmailProveedor":"elgranjerosa@gmail.com",
+        "EstadoProveedor":true
+    },
+    {
+        "PKProveedor":2,
+        "NombreProveedor":"Concentrados El Mejor",
+        "TelefonoProveedor":25477382,
+        "DireccionProveedor":"De la parada la estrella 300 metros al norte.Fatima,San Marcos.",
+        "EmailProveedor":"elmejor@gmail.com",
         "EstadoProveedor":true
     }
 ]

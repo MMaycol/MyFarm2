@@ -8,5 +8,52 @@
         "FKProducto": "2",
         "FKBodega": "1",
         "UnidadesExistencias": "400"
+    },
+    {
+        "FKProducto": "3",
+        "FKBodega": "1",
+        "UnidadesExistencias": "600"
+    },
+    {
+        "FKProducto": "4",
+        "FKBodega": "1",
+        "UnidadesExistencias": "400"
+    } ,{
+        "FKProducto": "5",
+        "FKBodega": "1",
+        "UnidadesExistencias": "600"
+    },
+    {
+        "FKProducto": "6",
+        "FKBodega": "1",
+        "UnidadesExistencias": "400"
+    }, {
+        "FKProducto": "7",
+        "FKBodega": "1",
+        "UnidadesExistencias": "600"
+    },
+    {
+        "FKProducto": "8",
+        "FKBodega": "1",
+        "UnidadesExistencias": "400"
+    } ,{
+        "FKProducto": "9",
+        "FKBodega": "1",
+        "UnidadesExistencias": "600"
+    },
+    {
+        "FKProducto": "10",
+        "FKBodega": "1",
+        "UnidadesExistencias": "400"
+    },
+    {
+        "FKProducto": "11",
+        "FKBodega": "1",
+        "UnidadesExistencias": "600"
+    },
+    {
+        "FKProducto": "12",
+        "FKBodega": "1",
+        "UnidadesExistencias": "400"
     }
 ]

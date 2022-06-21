@@ -1,9 +1,9 @@
 [
     {
         "PKProducto": "1",
-        "FKCategoria": "1",
+        "FKCategoria": "6",
         "FKMarca": "1",
-        "NombreProducto": "Producto 1",
+        "NombreProducto": "Alta Postura",
         "Descripcion": "desc",
         "EstadoProducto": "1"
     },
@@ -11,7 +11,82 @@
         "PKProducto": "2",
         "FKCategoria": "1",
         "FKMarca": "1",
-        "NombreProducto": "Producto 2",
+        "NombreProducto": "Ponedora de patio",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },    {
+        "PKProducto": "3",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "kan kan",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },
+    {
+        "PKProducto": "4",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Broiler",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },{
+        "PKProducto": "5",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Alimax",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },
+    {
+        "PKProducto": "6",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Conejo ",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },    {
+        "PKProducto": "7",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Vit Cat",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },
+    {
+        "PKProducto": "8",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Propet",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },{
+        "PKProducto": "9",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Alfa Kan",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },
+    {
+        "PKProducto": "10",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Firulays",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },    {
+        "PKProducto": "11",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Pet Master",
+        "Descripcion": "desc",
+        "EstadoProducto": "1"
+    },
+    {
+        "PKProducto": "12",
+        "FKCategoria": "1",
+        "FKMarca": "1",
+        "NombreProducto": "Pollos de Engorde",
         "Descripcion": "desc",
         "EstadoProducto": "1"
     }
