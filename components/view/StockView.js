@@ -51,17 +51,16 @@ export { StockView }
 const styles = StyleSheet.create({
     CardStyles:{
       flex: 5,
-     width: "100%",
+      width: "100%",
       backgroundColor: 'white'
         },
     text_input: {
-      width: "92%",
-      margin: 8,
-      padding: 10,
-      borderRadius: 4,
-      elevation: 4,
-      border: '3px solid #c6c6c6',
-      borderRadius: '10px'
-    }
+        height: 50,
+        margin: 12,
+        fontSize: 20,
+        padding: 8,
+        backgroundColor: '#e0e0e0',
+        borderRadius: 10
+      },
     
   });
