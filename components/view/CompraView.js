@@ -8,6 +8,7 @@ class CompraView extends React.Component {
     constructor(props) {
         super();
         this.props = props;
+
         this.state = {
             isLoading: true,
             Dataset: []
@@ -30,9 +31,9 @@ export { CompraView }
 const styles = StyleSheet.create({
     CardStyles:{
       flex: 5,
-     width: "100%",
+      width: "100%",
       backgroundColor: 'white'
-        },
+      },
     text_input: {
       width: "92%",
       margin: 8,

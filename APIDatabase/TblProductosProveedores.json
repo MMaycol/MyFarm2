@@ -1,6 +1,7 @@
 [
     {
         "FKProducto": "1",
+        "FKProveedor": "1",
         "PrecioCompra": "0.000",
         "Descuento": "0.000",
         "PrecioVenta": "0.000"
