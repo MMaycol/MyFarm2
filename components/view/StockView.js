@@ -39,7 +39,7 @@ class StockView extends React.Component {
             {this.state.isLoading ?
                 <ActivityIndicator /> :
                 this.state.Dataset.map(
-                    c => <DetalleStock
+                    c => <DetalleStock key = {c.FKProducto}
                      data = { c } />
                 )}
         </ScrollView> )

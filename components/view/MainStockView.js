@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NewFrmCompra } from './frmview/NewFrmCompra';
 
 //Views 
 import { StockView } from './StockView';
@@ -11,7 +12,8 @@ export default function MainStockView() {
       <Stack.Navigator screenOptions = { {
       headerShown: false 
     }}>
-       <Stack.Screen name="Stock" component={StockView} />
+       <Stack.Screen name="Stock" component = {StockView} />
+       <Stack.Screen name="Nueva Compra" component = {NewFrmCompra} />
        
        {/*
         <Stack.Screen name="MatriculadosView" component={MatriculadosView} />

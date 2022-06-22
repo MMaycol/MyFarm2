@@ -23,7 +23,7 @@ class DetalleStock extends React.Component {
        <Text style={styles.Title}>Detalle</Text>
         {
             this.state.Dataset.map(m => 
-                <Text style={styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )
+                <Text key = {m.PKProducto} style={styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )
         }
         <Text style={styles.Atribute}>Existencias en Unidades: {this.data.UnidadesExistencias}</Text>
         <Text style={styles.Atribute}>Codigo: {this.data.FKProducto}</Text>

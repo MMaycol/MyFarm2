@@ -2,10 +2,10 @@
     {
         "PKCompra": "1",
         "FKProveedor": "1",
-        "Descuento": "0.000",
-        "FechaCompra": "",
-        "Total": "",
-        "IVACompra": "",
+        "Descuento": "C$0.000",
+        "FechaCompra": "17/06/2022",
+        "Total": "C$1000.00",
+        "IVACompra": "C$100.00",
         "EstadoCompra": "1"
     }
 ]

@@ -58,7 +58,7 @@ class Entity {
         }
     }
 
-    Save = async (IdEntity = "id")=>{
+    Save = async (IdEntity = "PK")=>{
         let Data = await this.Get();
         this[IdEntity] = Data.length + 1;
         Data.push(this);
