@@ -5545,6 +5545,11 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
+"react-native-table-component@^1.2.2":
+  "integrity" "sha512-7bbsi5431iWcjj3toASh8lFHGi6AG/+MTd4M7GuksXKxx/CFs/Qwv1Ys7D2wgyuYKe3hxWNfSVrteFj0tOYXYw=="
+  "resolved" "https://registry.npmjs.org/react-native-table-component/-/react-native-table-component-1.2.2.tgz"
+  "version" "1.2.2"
+
 "react-native-web@0.17.7":
   "integrity" "sha512-4OOU/QjyRySOXyHfTvljEMS4VXKn42Qs3y9uHDPMwaCUFjwg0oasR/j706OaVgan9kF4Ipa2vJ3F6Z/Xqy8KeQ=="
   "resolved" "https://registry.npmjs.org/react-native-web/-/react-native-web-0.17.7.tgz"
