@@ -1,5 +1,4 @@
 import { Entity } from "./core/Entity";
-import { TblProductos } from "./TblProducto";
 
 class CatProveedor extends Entity {
     constructor(obj = {}) {

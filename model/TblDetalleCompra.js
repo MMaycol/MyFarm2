@@ -21,6 +21,21 @@ class TblDetalleCompra extends Entity {
     SubTotal = ""
     EstadoDetalleCompra ="1"
 
+    TblProductos = {
+        val: [],
+        get: async ()=> {
+            if (this.FKProducto != "") {
+                const producto = new TblProductos();
+
+                return await producto.GetByProps("PKProducto", this.FKProducto);
+            }else{
+                return this.TblProductos.val;
+            }            
+        }, set(newValue) {
+            this.TblProductos.val = newValue;
+        }
+    }
+
 }
 
 export { TblDetalleCompra }

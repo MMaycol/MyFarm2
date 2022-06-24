@@ -40,8 +40,6 @@ class Entity {
     }
 
     GetByProps = async (paramName, paramValue) => {
-        console.log(paramName);
-        console.log(paramValue);
 
         let Data = await this.TakeData();
         Data = Data.filter(ent => ent[paramName].toString().includes(paramValue.toString()));
@@ -79,7 +77,6 @@ class Entity {
             //localStorage.setItem(this.ApiMethods.Get, JSON.stringify(Data));
             await AsyncStorage.setItem('@' + this.ApiMethods.Get, JSON.stringify(Data));
         } else {
-            console.log(DataBase);
             Data = JSON.parse(DataBase);
         }
         return Data;

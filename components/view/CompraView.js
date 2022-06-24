@@ -34,7 +34,6 @@ class CompraView extends React.Component {
 
         return (<ScrollView style = {styles.CardStyles}>
           <TouchableOpacity onPress={() => {
-                console.log(this.CargarCompras);
                 this.props.navigation.navigate("Nueva Compra", { CargarCompras: this.CargarCompras });
             }}
             style = {styles.Button} >
