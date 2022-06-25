@@ -12,7 +12,7 @@ const CardComprasView = (props) => {
                 //props.navigation.navigate('FrmCompra');
             }}
             style = {styles.Button} >
-            <Text style = {styles.ButtonText}>Mas informacion</Text>
+            <Text style = {styles.ButtonText}>Ver Detalle</Text>
        </TouchableOpacity>
 
     </View>);

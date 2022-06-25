@@ -121,6 +121,7 @@ class FrmDetalleCompra extends React.Component {
             {/** OPCIONES */}
             <View style = { styles.frm }>
             <Button style = {{margin: 4}} title="Agregar producto" onPress={async () => {
+                 this.DetalleCompra.SubTotal = this.state.subtotal;
                  this.GuardarDetalleCompra(this.DetalleCompra); 
             }} />
             

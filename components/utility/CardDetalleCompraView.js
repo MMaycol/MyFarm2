@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, ScrollView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, ScrollView, TextInput } from 'react-native';
 import { TblDetalleCompra } from '../../model/TblDetalleCompra.js';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 //Componentes
 
@@ -12,23 +11,15 @@ class CardDetalleCompraView extends React.Component {
         
         this.state = {
             isLoading: true,
-            Dataset: [],
-            HeadTable: ['Nombre de producto', 'Cantida', 'Subtotal'],
-            DataTable: [
-              ['1', '2', '3', '4', '5'],
-              ['a', 'b', 'c', 'd', 'e'],
-              ['1', '2', '3', '4', '5'],
-              ['a', 'b', 'c', 'd', 'e'],
-              ['1', '2', '3', '4', '5']
-            ]
+            Dataset: []
         }
-
+        console.log(this.props.data);
      this.CargarProducto(this.props.data)
     }
 
     CargarProducto = async (e = (new TblDetalleCompra())) => {
         const c = await e.TblProductos.get();
-    
+
         this.setState({
             Dataset: c
         });
@@ -36,16 +27,25 @@ class CardDetalleCompraView extends React.Component {
 
     render() {
 
-        return (<View>
-            <Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
-           <Row data = {this.state.HeadTable} style = {styles_table.HeadStyle} textStyle = {styles_table.TableText}/>
-           <Rows data = {this.state.DataTable} textStyle = {styles_table.TableText}/>
-           </Table>
+        return (<View style={styles.CardStyles}>
              {
             this.state.Dataset.map(m => 
                 <Text key = {m.PKProducto} style = {styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )
              }
-            
+            <Text style= {styles.Atribute}>Cantidad: {this.props.data.Cantidad}</Text>
+            <Text style= {styles.Atribute}>SubTotal: {this.props.data.SubTotal}</Text>
+          <View style = {styles.box_row}>
+            <TouchableOpacity onPress={() => {
+                
+                }} style = {styles.Button1} >
+            <Text style = {styles.ButtonText}>Editar</Text> 
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+                
+              }} style = {styles.Button2} >
+          <Text style = {styles.ButtonText}>Eliminar</Text> 
+          </TouchableOpacity>
+            </View>
         </View>)
     }
 }
@@ -54,9 +54,13 @@ export { CardDetalleCompraView }
 
 const styles = StyleSheet.create({
     CardStyles:{
-      flex: 5,
-      width: "100%",
-      backgroundColor: 'white'
+      justifyContent: "center",
+      borderWidth: 1,
+      margin: 8,
+      padding: 8, 
+      borderRadius: 6,
+      marginTop: 4,
+      marginBottom: 4
         },
         Atribute: {
             color: "black",
@@ -71,22 +75,35 @@ const styles = StyleSheet.create({
         backgroundColor: '#e0e0e0',
         borderRadius: 10
       },
-    
-  });
-
-  const styles_table = StyleSheet.create({
-    container: { 
+      Button1: {
+        flex: 1,
+        marginTop: 4,
+        paddingTop: 4,
+        paddingBottom: 10,
+        backgroundColor: 'green',
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: 'white'
+    },
+    Button2: {
       flex: 1,
-      padding: 18,
-      paddingTop: 35,
-      backgroundColor: '#ffffff' 
-    },
-    HeadStyle: { 
-      height: 50,
-      alignContent: "center",
-      backgroundColor: '#ffe0f0'
-    },
-    TableText: { 
-      margin: 10
+      marginTop: 4,
+      paddingTop: 4,
+      paddingBottom: 10,
+      backgroundColor: 'red',
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor: 'white'
+  },
+  ButtonText: {
+      color: 'white',
+      textAlign: 'center',
+      fontSize: 17
+      },
+      box_row: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center'
     }
+    
   });

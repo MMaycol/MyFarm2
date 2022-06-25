@@ -18,20 +18,27 @@ class NewFrmCompra extends React.Component {
             PK: "ID",
             detallecompra: [],
             proveedor: "Proveedor",
-            fecha: Date().toString()
+            fecha: Date().toString(),
+            Total: 0,
+            IVA: 0
         }
+
+        this.suma = 0;
 
         this.CargarCompras = this.props.route.params.CargarCompras;
     }
 
     GuardarDetalleCompra = async (DetalleCompra) => {
-        
+    
+
         this.state.detallecompra.push(DetalleCompra);
 
-        this.setState({
-            detallecompra: this.state.detallecompra
-        });
-        
+            this.setState({
+                detallecompra: this.state.detallecompra,
+                Total:  this.state.Total + parseFloat(DetalleCompra.SubTotal) + (parseFloat(DetalleCompra.SubTotal) * parseFloat("0.15")),
+                IVA: this.state.IVA + parseFloat(DetalleCompra.SubTotal) * parseFloat("0.15")
+            });
+
         this.props.navigation.navigate("Nueva Compra");
     }
 
@@ -51,6 +58,8 @@ class NewFrmCompra extends React.Component {
     Save = async () => {
         try {
             this.Compra.FechaCompra = this.state.fecha;
+            this.Compra.Total = this.state.Total;
+            this.Compra.IVACompra = this.state.IVA;
 
             await this.Compra.Save("PKCompra");
 
@@ -58,7 +67,7 @@ class NewFrmCompra extends React.Component {
                 const detallecompra = this.state.n[index];
                 detallecompra.FKCompra = this.Compra.PKCompra;
 
-                await bloque.Save("PKDetalleCompra");
+                await this.detallecompra.Save("PKDetalleCompra");
             }
 
             return true;
@@ -110,24 +119,32 @@ class NewFrmCompra extends React.Component {
             {/** Detalle */}
             <Text style = {styles.Texto}>Detalle de compra</Text>
             <ScrollView>
+            
                 {
                 this.state.detallecompra.map(
-                    c => <CardDetalleCompraView key = {c.PKDetalleCompra} data = {c}  />
+                    c => <CardDetalleCompraView data = {c}  />
                 )
                 }
+
             </ScrollView>
 
             <View style= {styles.frm}>
+                <Text style={styles.Texto}>Descuento:</Text>
+                <TextInput style = {styles.InputStyle}
+                    placeholder = '0.000'
+                    onChangeText = { val => val}/>
+                    
             <View style = {styles.box_row}>
 
             <Text style={styles.Texto}>IVA:</Text>
             <TextInput style = {styles.subitem_2}
                 placeholder = '0.000' 
-                onChangeText = {val => this.Compra.IVACompra = val} />
+                value = {this.state.IVA}/>
 
             <Text style={styles.Texto}>Total:</Text>
             <TextInput style = {styles.InputStyle}
-                placeholder = '0.000' onChangeText = {val => this.Compra.Total = val} />
+                placeholder = '0.000' onChangeText = {val => this.Compra.Total = val} 
+                value = {this.state.Total}/>
 
             </View>
         </View>
