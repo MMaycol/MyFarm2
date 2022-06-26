@@ -1,3 +1,4 @@
+import { CatUnidadMedida } from "./CatUnidadMedida";
 import { Entity } from "./core/Entity";
 import { TblProductos } from "./TblProducto";
 
@@ -33,6 +34,21 @@ class TblDetalleCompra extends Entity {
             }            
         }, set(newValue) {
             this.TblProductos.val = newValue;
+        }
+    }
+
+    CatUnidadMedia = {
+        val: [],
+        get: async ()=> {
+            if (this.FKUnidadMedida != "") {
+                const umedida = new CatUnidadMedida();
+
+                return await umedida.GetByProps("PKUnidadMedida", this.FKUnidadMedida);
+            }else{
+                return this.CatUnidadMedia.val;
+            }            
+        }, set(newValue) {
+            this.CatUnidadMedia.val = newValue;
         }
     }
 

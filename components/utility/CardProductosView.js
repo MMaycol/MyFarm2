@@ -6,7 +6,7 @@ const CardProductosView = (props) => {
         <Text style = {styles.Atribute}>Descripcion: {props.data.Descripcion}</Text>
         
         <TouchableOpacity onPress={() => {
-             props.SeleccionProducto(props.data.PKProducto, props.data.NombreProducto);
+             props.selecct ? props.SeleccionProducto(props.data.PKProducto, props.data.NombreProducto) : false
             }}
 
             style = {styles.Button} >

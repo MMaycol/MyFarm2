@@ -11,14 +11,57 @@ class FrmDetalleCompra extends React.Component {
         this.state = {
             PK: "ID",
             producto: "Producto",
-            precio: "0.000",
-            subtotal: "0.000",
-
+            precio: "",
+            subtotal: "",
+            cantidad: "",
             PKU: "ID",
             unidad_de_medida: "Unidad de medida"
         }
 
+        this.NombreProducto = "";
+        this.NUnidadMedida = "";
+
         this.GuardarDetalleCompra = this.props.route.params.GuardarDetalleCompra;
+        this.Editar(this.props.route.params.Datos ?? null)
+        this.flag = true;
+    }
+
+    Editar = async (obj = (new TblDetalleCompra())) => {
+      
+        if(obj != null) {
+            const a = await this.DetalleCompra.TblProductos.get();
+            const b = await this.DetalleCompra.CatUnidadMedia.get();
+
+            const NameProduct = a.filter(i => i.PKProducto == obj.FKProducto);
+            const NameUnit = b.filter(i => i.PKUnidadMedida == obj.FKUnidadMedida);
+
+            NameProduct.forEach(element => {
+                this.NombreProducto = element.NombreProducto;
+            });
+            
+            NameUnit.forEach(element => {
+                this.NUnidadMedida = element.NombreUnidadMedida;
+            });
+
+            this.setState({
+                PK: obj.FKProducto,
+                producto: this.NombreProducto,
+                precio: (parseFloat(obj.SubTotal) / parseFloat(obj.Cantidad)).toString(),
+                subtotal: obj.SubTotal,
+                cantidad: obj.Cantidad,
+                PKU: obj.FKUnidadMedida,
+                unidad_de_medida: this.NUnidadMedida 
+
+            });
+
+            this.DetalleCompra.FKProducto = obj.FKProducto;
+            this.DetalleCompra.FKUnidadMedida = obj.FKUnidadMedida;
+            this.DetalleCompra.Cantidad = obj.Cantidad;
+            this.DetalleCompra.SubTotal = obj.SubTotal;
+            
+            this.flag = false;
+        }
+       
     }
 
     SeleccionProducto = async (Pk, Name) => {
@@ -42,7 +85,8 @@ class FrmDetalleCompra extends React.Component {
 
     SubTotal = async (val) =>  {
         this.setState({
-            subtotal: (val * this.state.precio).toString()
+            subtotal: (val * this.state.precio).toString(),
+            cantidad: val
         });
         
         this.DetalleCompra.Cantidad = val.toString();
@@ -81,7 +125,9 @@ class FrmDetalleCompra extends React.Component {
             <Text style={styles.Texto}>Precio:</Text>
             <TextInput style = {styles.InputStyle}
                 placeholder = '0.000'
-                onChangeText = {val => this.setState({precio: val})} />
+                onChangeText = {val => this.setState({precio: val})} 
+                value = {this.state.precio}
+                editable={true}/>
             </View>
 
             <View style = {styles.box_row}>
@@ -106,7 +152,8 @@ class FrmDetalleCompra extends React.Component {
             <TextInput style = {styles.InputStyle}
                 placeholder = '0'
                 onChangeText = {val => this.SubTotal(val)}
-                 />
+                value = {this.state.cantidad}
+                editable={true}/>
             </View>
 
             <View style = {styles.box_row}>
@@ -122,7 +169,7 @@ class FrmDetalleCompra extends React.Component {
             <View style = { styles.frm }>
             <Button style = {{margin: 4}} title="Agregar producto" onPress={async () => {
                  this.DetalleCompra.SubTotal = this.state.subtotal;
-                 this.GuardarDetalleCompra(this.DetalleCompra); 
+                 this.GuardarDetalleCompra(this.DetalleCompra, this.state.PK, this.flag); 
             }} />
             
             <Button style = {{margin: 4}} title="Cancelar" onPress={() => {

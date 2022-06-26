@@ -22,7 +22,7 @@ class ProveedoresView extends React.Component {
 
     CargarProveedores = async (param = "") => {
         const proveedores = await this.CatProveedores.Get(param);
-        console.log(proveedores);
+        
         this.setState({
             isLoading: false,
             Dataset: proveedores

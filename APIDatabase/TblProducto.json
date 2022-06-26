@@ -14,7 +14,8 @@
         "NombreProducto": "Ponedora de patio",
         "Descripcion": "desc",
         "EstadoProducto": "1"
-    },    {
+    },
+    {
         "PKProducto": "3",
         "FKCategoria": "1",
         "FKMarca": "1",

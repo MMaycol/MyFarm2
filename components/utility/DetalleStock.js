@@ -13,14 +13,14 @@ class DetalleStock extends React.Component {
         this.state = {
             Dataset: []
         }
-
+        console.log(this.data);
         this.CargarProducto(this.data);
     }
 
     render() {
       
         return(<View style={styles.CardStyle}>
-       <Text style={styles.Title}>Detalle</Text>
+       <Text style={styles.Title}>Detalle {this.state.Dataset.length}</Text>
         {
             this.state.Dataset.map(m => 
                 <Text key = {m.PKProducto} style={styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )
@@ -37,10 +37,11 @@ class DetalleStock extends React.Component {
     }
     
      CargarProducto = async (e = (new TblProductoBodega())) => {
-        const d = await e.TblProductos.get();
-    
+        const list = await e.TblProductos.get();
+        const result = list.filter(i => i.PKProducto == e.FKProducto);
+
         this.setState({
-            Dataset: d
+            Dataset: result
         });
     }
 }

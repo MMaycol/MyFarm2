@@ -13,46 +13,138 @@ class NewFrmCompra extends React.Component {
 
         this.Compra = new TblCompra();
         this.detallecompra = new TblDetalleCompra();
-
+       
         this.state = {
             PK: "ID",
             detallecompra: [],
+            backupbuy: [],
             proveedor: "Proveedor",
             fecha: Date().toString(),
             Total: 0,
             IVA: 0
         }
 
-        this.suma = 0;
+        /*
+        * Variables para la ediccion de los productos ya seleccionados
+          y por si se agrega un producto ya seleccionado anteriromente
+          para evitar la repeticion de card
+          sieguiente var:
+            this.total = 0;
+            this.OpA = 0;
+            this.OpB = 0;
+            this.NewTotal = 0;
+            this.keys = 0;
+        */
+        this.total = 0;
+        this.OpA = 0;
+        this.OpB = 0;
+        this.NewTotal = 0;
+        this.keys = 0;
 
         this.CargarCompras = this.props.route.params.CargarCompras;
     }
 
-    GuardarDetalleCompra = async (DetalleCompra) => {
+    GuardarDetalleCompra = async (DetalleCompra = (new TblDetalleCompra), key, flag) => {
+
+            if(this.state.detallecompra.length > 0) {
+
+            const detallecompras = this.state.detallecompra.map(p => {
+                if (p.FKProducto === key) {
+                    this.keys = p.FKProducto;
+                    if(flag) {
+
+                        this.total = p.SubTotal;
+
+                        p.FKUnidadMedida = DetalleCompra.FKUnidadMedida;
+                        p.Cantidad = ( parseFloat(p.Cantidad) + parseFloat(DetalleCompra.Cantidad));
+                        p.SubTotal = (parseFloat(p.SubTotal) + parseFloat(DetalleCompra.SubTotal));
+                    
+                    } else {
+
+                        this.total = p.SubTotal;
+                    
+                        p.FKUnidadMedida = DetalleCompra.FKUnidadMedida;
+                        p.Cantidad = DetalleCompra.Cantidad;
+                        p.SubTotal = DetalleCompra.SubTotal;
     
+                    }
 
-        this.state.detallecompra.push(DetalleCompra);
-
-            this.setState({
-                detallecompra: this.state.detallecompra,
-                Total:  this.state.Total + parseFloat(DetalleCompra.SubTotal) + (parseFloat(DetalleCompra.SubTotal) * parseFloat("0.15")),
-                IVA: this.state.IVA + parseFloat(DetalleCompra.SubTotal) * parseFloat("0.15")
+                    this.NewTotal = p.SubTotal;
+                return p;
+                }
+                return p;
             });
 
+            console.log(this.keys + " == "+ key);
+
+            if(this.keys == key) {
+
+            this.OpA = this.state.Total - (parseFloat(this.total) + (parseFloat(this.total) * parseFloat("0.15")));
+            this.OpB = this.state.IVA - (parseFloat(this.total) * parseFloat("0.15"));
+            
+            this.OpA = this.OpA + (parseFloat(this.NewTotal) + (parseFloat(this.NewTotal) * parseFloat("0.15")));
+            this.OpB = this.OpB + (parseFloat(this.NewTotal) * parseFloat("0.15"));
+            
+            this.setState({
+                detallecompra: detallecompras,
+                Total: this.OpA,
+                IVA: this.OpB 
+            });
+
+              } else {
+
+                this.state.detallecompra.push(DetalleCompra);
+
+                this.setState({
+                    detallecompra: this.state.detallecompra,
+                    Total:  this.state.Total + parseFloat(DetalleCompra.SubTotal) + (parseFloat(DetalleCompra.SubTotal) * parseFloat("0.15")),
+                    IVA: this.state.IVA + parseFloat(DetalleCompra.SubTotal) * parseFloat("0.15")
+                });
+
+              }
+            
+            } else {
+
+                this.state.detallecompra.push(DetalleCompra);
+
+                this.setState({
+                    detallecompra: this.state.detallecompra,
+                    Total:  this.state.Total + parseFloat(DetalleCompra.SubTotal) + (parseFloat(DetalleCompra.SubTotal) * parseFloat("0.15")),
+                    IVA: this.state.IVA + parseFloat(DetalleCompra.SubTotal) * parseFloat("0.15")
+                });
+            }
+      
+        
         this.props.navigation.navigate("Nueva Compra");
     }
 
     EliminarDetalleCompra = async (item) => {
 
+        const delete_item = this.state.detallecompra.filter(i => i.FKProducto !== item.FKProducto);
+ 
+        this.setState({
+            detallecompra: delete_item,
+            Total: this.state.Total - parseFloat(item.SubTotal) - (parseFloat(item.SubTotal) * parseFloat("0.15")),
+            IVA: this.state.IVA - (parseFloat(item.SubTotal) * parseFloat("0.15"))
+        });
     }
 
-    SeleccionProveedor = async (Pk, Name) => {
-        this.setState({
-            PK: Pk,
-            proveedor: Name
-        })
+    FunEditar = async (item) => {
+       
+        this.props.navigation.navigate("Detalle de Compra", {
+            GuardarDetalleCompra: this.GuardarDetalleCompra,
+            Datos: item
+        });
+    
+    }
 
-        this.Compra.FKProveedor = Pk;
+    SeleccionProveedor = async (key, Name) => {
+        this.setState({
+            PK: key,
+            proveedor: Name
+        });
+
+        this.Compra.FKProveedor = key;
     }
 
     Save = async () => {
@@ -64,7 +156,7 @@ class NewFrmCompra extends React.Component {
             await this.Compra.Save("PKCompra");
 
             for (let index = 0; index < this.state.detallecompra.length; index++) {
-                const detallecompra = this.state.n[index];
+                const detallecompra = this.state.detallecompra[index];
                 detallecompra.FKCompra = this.Compra.PKCompra;
 
                 await this.detallecompra.Save("PKDetalleCompra");
@@ -122,7 +214,9 @@ class NewFrmCompra extends React.Component {
             
                 {
                 this.state.detallecompra.map(
-                    c => <CardDetalleCompraView data = {c}  />
+                    c => <CardDetalleCompraView key = {c.FKProducto} data = {c}
+                     EliminarDetalleCompra = {this.EliminarDetalleCompra}  
+                     FunEditar = {this.FunEditar}/>
                 )
                 }
 

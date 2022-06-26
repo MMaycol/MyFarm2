@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, ScrollView, TextInput } from 'react-native';
-import { TblDetalleCompra } from '../../model/TblDetalleCompra.js';
 
 //Componentes
+import { TblDetalleCompra } from '../../model/TblDetalleCompra.js';
 
 class CardDetalleCompraView extends React.Component {
     constructor(props) {
@@ -13,17 +13,19 @@ class CardDetalleCompraView extends React.Component {
             isLoading: true,
             Dataset: []
         }
-        console.log(this.props.data);
      this.CargarProducto(this.props.data)
+     this.EliminarDetalleCompra = this.props.EliminarDetalleCompra;
+     this.Editar = this.props.FunEditar;
     }
 
-    CargarProducto = async (e = (new TblDetalleCompra())) => {
-        const c = await e.TblProductos.get();
+    CargarProducto = async (e = (new TblProductoBodega())) => {
+      const list = await e.TblProductos.get();
+      const result = list.filter(i => i.PKProducto == e.FKProducto);
 
-        this.setState({
-            Dataset: c
-        });
-    }
+      this.setState({
+          Dataset: result
+      });
+  }
 
     render() {
 
@@ -36,12 +38,12 @@ class CardDetalleCompraView extends React.Component {
             <Text style= {styles.Atribute}>SubTotal: {this.props.data.SubTotal}</Text>
           <View style = {styles.box_row}>
             <TouchableOpacity onPress={() => {
-                
+                this.props.FunEditar(this.props.data);
                 }} style = {styles.Button1} >
             <Text style = {styles.ButtonText}>Editar</Text> 
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {
-                
+                this.EliminarDetalleCompra(this.props.data);
               }} style = {styles.Button2} >
           <Text style = {styles.ButtonText}>Eliminar</Text> 
           </TouchableOpacity>
