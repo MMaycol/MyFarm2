@@ -17,7 +17,6 @@ class NewFrmCompra extends React.Component {
         this.state = {
             PK: "ID",
             detallecompra: [],
-            backupbuy: [],
             proveedor: "Proveedor",
             fecha: Date().toString(),
             Total: 0,
@@ -51,22 +50,16 @@ class NewFrmCompra extends React.Component {
             const detallecompras = this.state.detallecompra.map(p => {
                 if (p.FKProducto === key) {
                     this.keys = p.FKProducto;
+                    
+                    this.total = p.SubTotal;
+                    p.FKUnidadMedida = DetalleCompra.FKUnidadMedida;
+
                     if(flag) {
-
-                        this.total = p.SubTotal;
-
-                        p.FKUnidadMedida = DetalleCompra.FKUnidadMedida;
                         p.Cantidad = ( parseFloat(p.Cantidad) + parseFloat(DetalleCompra.Cantidad));
                         p.SubTotal = (parseFloat(p.SubTotal) + parseFloat(DetalleCompra.SubTotal));
-                    
                     } else {
-
-                        this.total = p.SubTotal;
-                    
-                        p.FKUnidadMedida = DetalleCompra.FKUnidadMedida;
                         p.Cantidad = DetalleCompra.Cantidad;
                         p.SubTotal = DetalleCompra.SubTotal;
-    
                     }
 
                     this.NewTotal = p.SubTotal;
