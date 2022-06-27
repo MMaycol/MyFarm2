@@ -15,12 +15,12 @@ class NewFrmCompra extends React.Component {
         this.detallecompra = new TblDetalleCompra();
        
         this.state = {
-            PK: "ID",
+            PK: "",
             detallecompra: [],
-            proveedor: "Proveedor",
+            proveedor: "",
             fecha: Date().toString(),
-            Total: 0,
-            IVA: 0
+            Total: 0.000,
+            IVA: 0.000
         }
 
         /*
@@ -224,14 +224,13 @@ class NewFrmCompra extends React.Component {
             <View style = {styles.box_row}>
 
             <Text style={styles.Texto}>IVA:</Text>
-            <TextInput style = {styles.subitem_2}
-                placeholder = '0.000' 
-                value = {this.state.IVA}/>
+            <TextInput style = {styles.subitem_2} 
+                value = {"C$" + this.state.IVA}/>
 
             <Text style={styles.Texto}>Total:</Text>
             <TextInput style = {styles.InputStyle}
-                placeholder = '0.000' onChangeText = {val => this.Compra.Total = val} 
-                value = {this.state.Total}/>
+                onChangeText = {val => this.Compra.Total = val} 
+                value = {"C$" + this.state.Total}/>
 
             </View>
         </View>
@@ -243,12 +242,12 @@ class NewFrmCompra extends React.Component {
                 if (response) {
                     await this.CargarCompras();
                     this.setState({
-                        PK: "ID",
+                        PK: "",
                         detallecompra: [],
-                        proveedor: "Proveedor",
+                        proveedor: "",
                         fecha: Date().toString(),
-                        Total: 0,
-                        IVA: 0
+                        Total: 0.000,
+                        IVA: 0.000
                     });
 
                     this.props.navigation.navigate("Compra");

@@ -9,13 +9,13 @@ class FrmDetalleCompra extends React.Component {
         this.DetalleCompra = new TblDetalleCompra();
 
         this.state = {
-            PK: "ID",
-            producto: "Producto",
+            PK: "",
+            producto: "",
             precio: "",
-            subtotal: "",
+            subtotal: "0.000",
             cantidad: "",
-            PKU: "ID",
-            unidad_de_medida: "Unidad de medida"
+            PKU: "",
+            unidad_de_medida: ""
         }
 
         this.NombreProducto = "";
@@ -102,9 +102,9 @@ class FrmDetalleCompra extends React.Component {
             <View style = { styles.frm }>
 
             <View style = { styles.box_row }>
-            <TextInput style = {styles.subitem_1}
-                placeholder='Producto'
-                value= {this.state.producto}
+            <TextInput style = {styles.InputStyle}
+                placeholder = 'Producto'
+                value = {this.state.producto}
                 disabled />
 
             <TextInput style = {styles.subitem_2}
@@ -124,16 +124,16 @@ class FrmDetalleCompra extends React.Component {
             <View style = {styles.box_row}>
             <Text style={styles.Texto}>Precio:</Text>
             <TextInput style = {styles.InputStyle}
-                placeholder = '0.000'
+                placeholder = 'C$0.000'
                 onChangeText = {val => this.setState({precio: val})} 
                 value = {this.state.precio}
                 editable={true}/>
             </View>
 
             <View style = {styles.box_row}>
-            <TextInput style = {styles.subitem_1}
+            <TextInput style = {styles.InputStyle}
                 placeholder = 'Unida de medida'
-                value= {this.state.unidad_de_medida}
+                value = {this.state.unidad_de_medida}
                 disabled/>
                 <TextInput style = {styles.subitem_2}
                 placeholder='ID'
@@ -159,8 +159,7 @@ class FrmDetalleCompra extends React.Component {
             <View style = {styles.box_row}>
             <Text style = {styles.Texto}>SubTotal:</Text>
             <TextInput style = {styles.InputStyle}
-                placeholder = '0.000'
-                value= {this.state.subtotal} />
+                value= { "C$" + this.state.subtotal} />
             </View>
 
             </View>
@@ -221,17 +220,15 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderColor: "#999"
     },
-    subitem_1: {
-        flex: 1,
-        padding: 4,
-        margin: 2,
-        backgroundColor: '#e0e0e0'
-    },
+
     subitem_2: {
         padding: 4,
         margin: 2,
         width: 30,
-        backgroundColor: '#e0e0e0'
+        
+        borderWidth: 2,
+        borderRadius: 5,
+        borderColor: "#999"
     },
     frm: {
         display: 'flex',
