@@ -189,7 +189,7 @@ class NewFrmCompra extends React.Component {
                 });
             }} />
             </View>
-
+            
             <TextInput style = {styles.InputStyle}
                 placeholder = 'Fecha de Compra'
                 value = {this.state.fecha}/>
@@ -241,7 +241,16 @@ class NewFrmCompra extends React.Component {
                 const response = await this.Save();
                 
                 if (response) {
-                    await this.CargarCompras(); 
+                    await this.CargarCompras();
+                    this.setState({
+                        PK: "ID",
+                        detallecompra: [],
+                        proveedor: "Proveedor",
+                        fecha: Date().toString(),
+                        Total: 0,
+                        IVA: 0
+                    });
+
                     this.props.navigation.navigate("Compra");
                 } else {
                     Alert.alert("Algo salio mal :(");
