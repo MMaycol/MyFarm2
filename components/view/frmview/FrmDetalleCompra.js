@@ -112,7 +112,7 @@ class FrmDetalleCompra extends React.Component {
                 value= {this.state.PK}
                 disabled />
             
-            <Button title = "+" onPress= { async () => {
+            <Button color = {'#000'} title = "+" onPress= { async () => {
                 //Event seleccionar producto
                 this.props.navigation.navigate("Seleccionar Producto", {
                     SeleccionProducto: this.SeleccionProducto ,
@@ -139,7 +139,7 @@ class FrmDetalleCompra extends React.Component {
                 placeholder='ID'
                 value={this.state.PKU} 
                 disabled />
-                <Button title = "+" onPress= { async () => {
+                <Button color={'#000'} title = "+" onPress= { async () => {
                 //Event seleccionar unidad de medida
                 this.props.navigation.navigate("Seleccionar Unit", {
                     SeleccionUnit: this.SeleccionUnit
@@ -166,12 +166,12 @@ class FrmDetalleCompra extends React.Component {
 
             {/** OPCIONES */}
             <View style = { styles.frm }>
-            <Button style = {{margin: 4}} title="Agregar producto" onPress={async () => {
+            <Button color={'#000'} style = {{margin: 4}} title="Agregar producto" onPress={async () => {
                  this.DetalleCompra.SubTotal = this.state.subtotal;
                  this.GuardarDetalleCompra(this.DetalleCompra, this.state.PK, this.flag); 
             }} />
             
-            <Button style = {{margin: 4}} title="Cancelar" onPress={() => {
+            <Button color={'red'} style = {{margin: 4}} title="Cancelar" onPress={() => {
                 this.props.navigation.navigate("Nueva Compra");
             }} />
             </View>

@@ -4,12 +4,11 @@ const CardComprasView = (props) => {
     return (<View style={styles.CardStyle}>
         <Text style={styles.Title}>Compra del {props.data.FechaCompra}</Text>
         <Text style={styles.Atribute}>Descuento: {props.data.Descuento}</Text>
-        {/*<Text style={styles.Atribute}>Fecha de compra: {props.data.FechaCompra}</Text>*/}
         <Text style={styles.Atribute}>Total: {props.data.Total}</Text>
         <Text style={styles.Atribute}>IVA: {props.data.IVACompra}</Text>
 
         <TouchableOpacity onPress={() => {
-                //props.navigation.navigate('FrmCompra');
+                props.CargarInfo(props.data)
             }}
             style = {styles.Button} >
             <Text style = {styles.ButtonText}>Ver Detalle</Text>

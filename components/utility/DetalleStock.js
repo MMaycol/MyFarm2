@@ -13,14 +13,13 @@ class DetalleStock extends React.Component {
         this.state = {
             Dataset: []
         }
-        console.log(this.data);
         this.CargarProducto(this.data);
     }
 
     render() {
       
         return(<View style={styles.CardStyle}>
-       <Text style={styles.Title}>Detalle {this.state.Dataset.length}</Text>
+       <Text style={styles.Title}>Detalle de producto</Text>
         {
             this.state.Dataset.map(m => 
                 <Text key = {m.PKProducto} style={styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )

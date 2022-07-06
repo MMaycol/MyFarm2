@@ -1,5 +1,7 @@
 import { Entity } from "./core/Entity";
-import { TblProductos } from "./TblProducto";
+
+import { CatProveedor } from "./CatProveedor";
+import { TblDetalleCompra } from "./TblDetalleCompra";
 
 class TblCompra extends Entity {
     constructor(obj = {}) {
@@ -17,9 +19,39 @@ class TblCompra extends Entity {
     FKProveedor = "1" 
     Descuento = "0.000" 
     FechaCompra = "" 
-    Total =  "" 
-    IVACompra = "" 
-    EstadoCompra = "1"
+    Total =  "0.000";
+    IVACompra = "0.000" ;
+    EstadoCompra = "1";
+
+    CatProveedor = {
+        val: [],
+        get: async ()=> {
+            if (this.FKProveedor != "") {
+                const proveedor = new CatProveedor();
+
+                return await proveedor.GetByProps("PKProveedor", this.FKProveedor);
+            }else{
+                return this.CatProveedor.val;
+            }            
+        }, set(newValue) {
+            this.CatProveedor.val = newValue;
+        }
+    }
+
+    TblDetalleCompra = {
+        val: [],
+        get: async ()=> {
+            if (this.PKCompra != "") {
+                const detalle = new TblDetalleCompra();
+
+                return await detalle.GetByProps("FKCompra", this.PKCompra);
+            }else{
+                return this.TblDetalleCompra.val;
+            }            
+        }, set(newValue) {
+            this.TblDetalleCompra.val = newValue;
+        }
+    }
 
 }
 

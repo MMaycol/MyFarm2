@@ -28,7 +28,7 @@ class TblDetalleCompra extends Entity {
             if (this.FKProducto != "") {
                 const producto = new TblProductos();
 
-                return await producto.GetByProps("PKProducto", this.FKProducto);
+                return await producto.GetByPropsBuy("PKProducto", this.FKProducto);
             }else{
                 return this.TblProductos.val;
             }            
@@ -43,7 +43,7 @@ class TblDetalleCompra extends Entity {
             if (this.FKUnidadMedida != "") {
                 const umedida = new CatUnidadMedida();
 
-                return await umedida.GetByProps("PKUnidadMedida", this.FKUnidadMedida);
+                return await umedida.GetByPropsBuy("PKUnidadMedida", this.FKUnidadMedida);
             }else{
                 return this.CatUnidadMedia.val;
             }            

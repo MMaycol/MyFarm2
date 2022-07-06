@@ -34,6 +34,7 @@ class NewFrmCompra extends React.Component {
             this.NewTotal = 0;
             this.keys = 0;
         */
+       
         this.total = 0;
         this.OpA = 0;
         this.OpB = 0;
@@ -152,7 +153,7 @@ class NewFrmCompra extends React.Component {
                 const detallecompra = this.state.detallecompra[index];
                 detallecompra.FKCompra = this.Compra.PKCompra;
 
-                await this.detallecompra.Save("PKDetalleCompra");
+                await detallecompra.Save("PKDetalleCompra");
             }
 
             return true;
@@ -182,7 +183,7 @@ class NewFrmCompra extends React.Component {
                 value = { this.state.PK }
                 disabled />
 
-            <Button title = "+" onPress = { async () => {
+            <Button color={'#000'} title = "+" onPress = { async () => {
                 //Event seleccionar proveedor
                 this.props.navigation.navigate("Seleccionar Proveedor", {
                     SeleccionProveedor: this.SeleccionProveedor
@@ -195,7 +196,7 @@ class NewFrmCompra extends React.Component {
                 value = {this.state.fecha}/>
             </View>
 
-            <Button title="Agregar producto" onPress={async () => {
+            <Button color={'#000'} title="Agregar producto" onPress={async () => {
                 this.props.navigation.navigate("Detalle de Compra", {
                     GuardarDetalleCompra: this.GuardarDetalleCompra
                 });
@@ -236,7 +237,7 @@ class NewFrmCompra extends React.Component {
         </View>
 
             {/** OPCIONES */}
-            <Button title = "Guardar" onPress = { async () => {
+            <Button color={'#000'} title = "Guardar" onPress = { async () => {
                 const response = await this.Save();
                 
                 if (response) {
@@ -257,7 +258,7 @@ class NewFrmCompra extends React.Component {
             
             }} />
 
-            <Button title="Cancelar" onPress={() => {
+            <Button color={'red'} title="Cancelar" onPress={() => {
                 this.props.navigation.navigate("Compra");
             }} />
         </ScrollView>;
