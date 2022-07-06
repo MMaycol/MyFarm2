@@ -8,7 +8,7 @@ import { CardProductosView } from '../utility/CardProductosView';
 //Models
 import { TblProductos } from '../../model/TblProducto';
 
-class ProductosView extends React.Component {
+class ProductosVentaView extends React.Component {
     constructor(props) {
         super();
         this.props = props;
@@ -29,10 +29,16 @@ class ProductosView extends React.Component {
             isLoading: false,
             Dataset: productos
         });
+
     }
+
     SeleccionProducto = async (pk, name) => {
         this.props.route.params.SeleccionProducto(pk, name);
         this.props.navigation.navigate("Detalle de Compra");
+    }
+    SeleccionProducto = async (pk, name) => {
+        this.props.route.params.SeleccionProducto(pk, name);
+        this.props.navigation.navigate("Detalle de Venta");
     }
 
     render() {
@@ -52,7 +58,7 @@ class ProductosView extends React.Component {
     }
 }
 
-export { ProductosView }
+export { ProductosVentaView }
 
 const styles = StyleSheet.create({
     CardStyles:{

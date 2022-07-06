@@ -1,9 +1,31 @@
 [
     {
         "PKUnidadMedida": "1",
-        "NombreUnidadMedida": "Quintal DogPets",
-        "Abreviacion": "QDP",
+        "NombreUnidadMedida": "Libra",
+        "Abreviacion": "LB",
+        "Equivalencia": "1",
+        "Estado": "1"
+    },
+    {
+        "PKUnidadMedida": "2",
+        "NombreUnidadMedida": "Medio Quintal",
+        "Abreviacion": "MQ",
         "Equivalencia": "100",
         "Estado": "1"
+    }, 
+    {
+        "PKUnidadMedida": "3",
+        "NombreUnidadMedida": "Arroba",
+        "Abreviacion": "AB",
+        "Equivalencia": "25",
+        "Estado": "1"
+    },
+    {
+        "PKUnidadMedida": "5",
+        "NombreUnidadMedida": "Quintal()",
+        "Abreviacion": "QDP",
+        "Equivalencia": "50",
+        "Estado": "1"
     }
+     
 ]

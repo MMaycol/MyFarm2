@@ -22,10 +22,11 @@ class DetalleStock extends React.Component {
        <Text style={styles.Title}>Detalle de producto</Text>
         {
             this.state.Dataset.map(m => 
-                <Text key = {m.PKProducto} style={styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )
+        <Text key = {m.PKProducto} style={styles.Atribute}>Nombre de producto: {m.NombreProducto}</Text> )
         }
         <Text style={styles.Atribute}>Existencias en Unidades: {this.data.UnidadesExistencias}</Text>
         <Text style={styles.Atribute}>Codigo: {this.data.FKProducto}</Text>
+       
        <Button title = "Ver Mas" onPress={() => { 				
             	/* props.metodo(props.data) */
             				}}

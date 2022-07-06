@@ -1,8 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FrmDetalleCompra } from './frmview/FrmDetalleCompra';
 import { NewFrmCompra } from './frmview/NewFrmCompra';
+import { FrmDetalleVenta } from './frmview/FrmDetalleVenta';
+import { NewFrmVenta } from './frmview/NewFrmVenta';
 import { ProductosView } from './ProductosView';
+import { ProductosVentaView } from './ProductosVentaView';
+import { EmpleadosView } from './EmpleadosView';
 import {ProveedoresView} from './ProveedoresView';
+import {MedidaView} from './MedidaView';
 import {UnidadMedidaView} from './UnidadMedidaView';
 
 //Views 
@@ -25,7 +30,13 @@ export default function MainStockView() {
        <Stack.Screen name="Seleccionar Producto" component = {ProductosView} />
        <Stack.Screen name="Seleccionar Proveedor" component = {ProveedoresView} />
        <Stack.Screen name="Seleccionar Unit" component = {UnidadMedidaView} />
-       
+       <Stack.Screen name="Seleccionar Medida" component = {MedidaView} />
+       <Stack.Screen name="Detalle de Venta" component = {FrmDetalleVenta} />
+       <Stack.Screen name="Nueva Venta" component = {NewFrmVenta} />
+       <Stack.Screen name="Seleccionar Empleado" component = {EmpleadosView} />
+       <Stack.Screen name="Seleccionar ProductoVenta" component = {ProductosVentaView} />
+
+
       </Stack.Navigator>
   );
   
