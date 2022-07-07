@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, TextInput, ScrollView, Alert } from 're
 
 //Model
 import { TblVenta } from '../../../model/TblVenta';
-import { TblDetalleVenta } from '../../../model/TblDetalleVenta';
+import { TblDetalleVenta} from '../../../model/TblDetalleVenta';
 import { CardDetalleVentaView } from '../../utility/CardDetalleVentaView';
 
 class NewFrmVenta extends React.Component {
@@ -17,8 +17,7 @@ class NewFrmVenta extends React.Component {
         this.state = {
             PK: "",
             detalleventa: [],
-            Empleado: "",
-            NombreCliente:"",
+            empleado: "",
             fecha: Date().toString(),
             Total: 0.000,
             IVA: 0.000
@@ -35,6 +34,7 @@ class NewFrmVenta extends React.Component {
             this.NewTotal = 0;
             this.keys = 0;
         */
+       
         this.total = 0;
         this.OpA = 0;
         this.OpB = 0;
@@ -114,7 +114,7 @@ class NewFrmVenta extends React.Component {
 
     EliminarDetalleVenta = async (item) => {
 
-        const delete_item = this.state.detalleventa.filter(i => i.FKProducto !== item.FKProducto);
+        const delete_item = this.state.detalleVenta.filter(i => i.FKProducto !== item.FKProducto);
  
         this.setState({
             detalleventa: delete_item,
@@ -124,17 +124,18 @@ class NewFrmVenta extends React.Component {
     }
 
     FunEditar = async (item) => {
-       console.log(item);
+       
         this.props.navigation.navigate("Detalle de Venta", {
             GuardarDetalleVenta: this.GuardarDetalleVenta,
             Datos: item
         });
+    
     }
 
     SeleccionEmpleado = async (key, Name) => {
         this.setState({
             PK: key,
-            Empleado: Name
+            empleado: Name
         });
 
         this.Venta.FKEmpleado = key;
@@ -145,15 +146,14 @@ class NewFrmVenta extends React.Component {
             this.Venta.FechaFactura = this.state.fecha;
             this.Venta.TotalVenta = this.state.Total;
             this.Venta.IVAVenta = this.state.IVA;
-            this.Venta.NombreCliente = this.state.NombreCliente;
 
             await this.Venta.Save("PKVenta");
 
             for (let index = 0; index < this.state.detalleventa.length; index++) {
                 const detalleventa = this.state.detalleventa[index];
-                detalleventa.FKventa = this.Venta.PKVenta;
+                detalleventa.FKVenta= this.Venta.PKVenta;
 
-                await this.detalleventa.Save("PKDetalleVenta");
+                await detalleventa.Save("PKDetalleVenta");
             }
 
             return true;
@@ -175,7 +175,7 @@ class NewFrmVenta extends React.Component {
             <View style = { styles.box_row }>
             <TextInput style = {styles.InputStyle}
                 placeholder='Empleado'
-                value = { this.state.Empleado }
+                value = { this.state.empleado }
                 disabled />
 
             <TextInput style = {styles.subitem_2}
@@ -183,20 +183,12 @@ class NewFrmVenta extends React.Component {
                 value = { this.state.PK }
                 disabled />
 
-            <Button title = "+" onPress = { async () => {
-                //Event seleccionar empleado
+            <Button color={'#000'} title = "+" onPress = { async () => {
+                //Event seleccionar proveedor
                 this.props.navigation.navigate("Seleccionar Empleado", {
                     SeleccionEmpleado: this.SeleccionEmpleado
                 });
             }} />
-            </View>
-            <View style = {styles.box_row}>
-            <Text style={styles.Texto}>NombreCliente</Text>
-            <TextInput style = {styles.InputStyle}
-                placeholder = 'NombreCliente'
-                onChangeText = {val => this.setState({NombreCliente: val})} 
-                value = {this.state.NombreCliente}
-                editable={true}/>
             </View>
             
             <TextInput style = {styles.InputStyle}
@@ -204,14 +196,14 @@ class NewFrmVenta extends React.Component {
                 value = {this.state.fecha}/>
             </View>
 
-            <Button title="Agregar producto" onPress={async () => {
+            <Button color={'#000'} title="Agregar producto" onPress={async () => {
                 this.props.navigation.navigate("Detalle de Venta", {
                     GuardarDetalleVenta: this.GuardarDetalleVenta
                 });
             }} />
 
             {/** Detalle */}
-            <Text style = {styles.Texto}>Detalle de venta</Text>
+            <Text style = {styles.Texto}>Detalle de Venta</Text>
             <ScrollView>
             
                 {
@@ -245,14 +237,14 @@ class NewFrmVenta extends React.Component {
         </View>
 
             {/** OPCIONES */}
-            <Button title = "Guardar" onPress = { async () => {
+            <Button color={'#000'} title = "Guardar" onPress = { async () => {
                 const response = await this.Save();
                 
                 if (response) {
                     await this.CargarVentas();
                     this.setState({
                         PK: "",
-                        detalleventas: [],
+                        detalleventa: [],
                         empleado: "",
                         fecha: Date().toString(),
                         Total: 0.000,
@@ -266,7 +258,7 @@ class NewFrmVenta extends React.Component {
             
             }} />
 
-            <Button title="Cancelar" onPress={() => {
+            <Button color={'red'} title="Cancelar" onPress={() => {
                 this.props.navigation.navigate("Venta");
             }} />
         </ScrollView>;

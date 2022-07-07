@@ -1,6 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import { TblDetalleVenta } from '../../../model/TblDetalleVenta';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { BottomSheet } from 'react-native-btr';
+
+import { CardProductosView } from '../../utility/CardProductosView';
+
+import { TblDetalleVenta} from '../../../model/TblDetalleVenta';
+import { TblProductos } from '../../../model/TblProducto';
+import { CatUnidadMedida } from '../../../model/CatUnidadMedida';
+import { CardUnidadMedidaView } from '../../utility/CardUnidadMedidaView';
 
 class FrmDetalleVenta extends React.Component {
     constructor(props) {
@@ -9,6 +16,10 @@ class FrmDetalleVenta extends React.Component {
         this.DetalleVenta = new TblDetalleVenta();
 
         this.state = {
+            options: "",
+            visible: false,
+            productos: [],
+            unit: [],
             PK: "",
             producto: "",
             precio: "",
@@ -18,23 +29,46 @@ class FrmDetalleVenta extends React.Component {
             unidad_de_medida: ""
         }
 
+        this.TblProductos = new TblProductos();
+        this.CatUnidadMedida = new CatUnidadMedida();
+
         this.NombreProducto = "";
         this.NUnidadMedida = "";
 
         this.GuardarDetalleVenta = this.props.route.params.GuardarDetalleVenta;
         this.Editar(this.props.route.params.Datos ?? null)
         this.flag = true;
+
+        this.CargarProductos();
+        this.CargarUnit();
+    }
+
+    CargarProductos = async (param = "") => {
+        const productos = await this.TblProductos.Get(param);
+
+        this.setState({
+            productos: productos
+        });
+    }
+
+    CargarUnit = async (param = "") => {
+        const unit = await this.CatUnidadMedida.Get(param);
+
+        this.setState({
+            unit: unit
+        });
+
     }
 
     Editar = async (obj = (new TblDetalleVenta())) => {
-       console.log(obj);
+      
         if(obj != null) {
-            const a = await this.DetalleVenta.TblProductos.get();
-            const b = await this.DetalleVenta.CatUnidadMedia.get();
+            const a = await obj.TblProductos.get();
+            const b = await obj.CatUnidadMedia.get();
 
             const NameProduct = a.filter(i => i.PKProducto == obj.FKProducto);
             const NameUnit = b.filter(i => i.PKUnidadMedida == obj.FKUnidadMedida);
-
+            
             NameProduct.forEach(element => {
                 this.NombreProducto = element.NombreProducto;
             });
@@ -55,7 +89,7 @@ class FrmDetalleVenta extends React.Component {
             });
 
             this.DetalleVenta.FKProducto = obj.FKProducto;
-            this.DetalleVenta.UnidadMedida = obj.UnidadMedida;
+            this.DetalleVenta.FKUnidadMedida = obj.FKUnidadMedida;
             this.DetalleVenta.Cantidad = obj.Cantidad;
             this.DetalleVenta.SubTotal = obj.SubTotal;
             
@@ -67,6 +101,7 @@ class FrmDetalleVenta extends React.Component {
     SeleccionProducto = async (Pk, Name) => {
     
         this.setState({
+            visible: !this.state.visible,
             PK: Pk,
             producto: Name
         });
@@ -76,6 +111,7 @@ class FrmDetalleVenta extends React.Component {
 
     SeleccionUnit = async (Pk, Name) => {
         this.setState({
+            visible: !this.state.visible,
             PKU: Pk,
             unidad_de_medida: Name
         });
@@ -92,6 +128,13 @@ class FrmDetalleVenta extends React.Component {
         this.DetalleVenta.Cantidad = val.toString();
         this.DetalleVenta.SubTotal = this.state.subtotal;
     }
+
+    toggleBottomNavigationView = (param = "") => {
+        this.setState({
+          options: param,
+          visible: !this.state.visible
+        })
+      }
 
     render() {
         return <View style = {styles.CardStyles}>
@@ -112,12 +155,9 @@ class FrmDetalleVenta extends React.Component {
                 value= {this.state.PK}
                 disabled />
             
-            <Button title = "+" onPress= { async () => {
+            <Button color = {'#000'} title = "+" onPress= { async () => {
                 //Event seleccionar producto
-                this.props.navigation.navigate("Seleccionar ProductoVenta", {
-                    SeleccionProducto: this.SeleccionProducto ,
-                    selecct: true
-                });
+                this.toggleBottomNavigationView("producto");
             }} />
             </View>
 
@@ -139,11 +179,9 @@ class FrmDetalleVenta extends React.Component {
                 placeholder='ID'
                 value={this.state.PKU} 
                 disabled />
-                <Button title = "+" onPress= { async () => {
+                <Button color={'#000'} title = "+" onPress= { async () => {
                 //Event seleccionar unidad de medida
-                this.props.navigation.navigate("Seleccionar Medida", {
-                    SeleccionUnit: this.SeleccionUnit
-                });
+                this.toggleBottomNavigationView("unit");
             }} />
             </View>
 
@@ -166,15 +204,61 @@ class FrmDetalleVenta extends React.Component {
 
             {/** OPCIONES */}
             <View style = { styles.frm }>
-            <Button style = {{margin: 4}} title="Agregar producto" onPress={async () => {
+            <Button color={'#000'} style = {{margin: 4}} title="Agregar producto" onPress={async () => {
                  this.DetalleVenta.SubTotal = this.state.subtotal;
                  this.GuardarDetalleVenta(this.DetalleVenta, this.state.PK, this.flag); 
             }} />
             
-            <Button style = {{margin: 4}} title="Cancelar" onPress={() => {
+            <Button color={'red'} style = {{margin: 4}} title="Cancelar" onPress={() => {
                 this.props.navigation.navigate("Nueva Venta");
             }} />
             </View>
+
+            <BottomSheet
+                    visible = {this.state.visible}
+                    onBackButtonPress = {this.toggleBottomNavigationView}
+                    onBackdropPress = {this.toggleBottomNavigationView}>
+
+                <ScrollView style = {styles.bottomNavigationView}>
+                    <View style = {styles.CardStyle}>
+                     <Text style = {styles.Title}>Seleccionar producto</Text>
+                     <Button color = {'#000'} onPress = {this.toggleBottomNavigationView} title = 'Regresar'></Button>
+
+                    {
+                    this.state.options == "producto"?
+                     <TextInput style = {styles.text_input}
+                                placeholder = 'Buscar productos'
+                                onChangeText = { val => this.CargarProductos(val)}></TextInput> 
+                                : false
+                    }
+                    {
+                    this.state.options == "unit"?
+                    <TextInput style = {styles.text_input}
+                                placeholder = 'Buscar unidad de medida'
+                                onChangeText = { val => this.CargarProductos(val)}></TextInput>  
+                                : false
+                    }
+                    
+                    {
+                    this.state.options == "producto"?
+                    this.state.productos.map(
+                    c => <CardProductosView key = {c.PKProducto}
+                     data = { c } SeleccionProducto = { this.SeleccionProducto } selecct = { true } />
+                    ) : false
+                    }
+
+                    {
+                    this.state.options == "unit"?
+                    this.state.unit.map(
+                        c => <CardUnidadMedidaView key = {c.PKUnidadMedida}
+                         data = { c } SeleccionUnit = { this.SeleccionUnit } />
+                    ) : false
+                    }
+
+                    </View>
+
+                        </ScrollView>
+                    </BottomSheet>
         </View>;
     }
 
@@ -246,5 +330,22 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
-    }
+    },
+    bottomNavigationView: {
+        backgroundColor: '#fff',
+        width: '100%',
+        height: '100%',
+       
+      },
+      CardStyle: {
+        margin: 8
+    },
+    text_input: {
+            height: 50,
+            margin: 12,
+            fontSize: 20,
+            padding: 8,
+            backgroundColor: '#e0e0e0',
+            borderRadius: 10
+          }
 });

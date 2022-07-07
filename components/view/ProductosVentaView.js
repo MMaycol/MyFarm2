@@ -32,10 +32,7 @@ class ProductosVentaView extends React.Component {
 
     }
 
-    SeleccionProducto = async (pk, name) => {
-        this.props.route.params.SeleccionProducto(pk, name);
-        this.props.navigation.navigate("Detalle de Compra");
-    }
+    
     SeleccionProducto = async (pk, name) => {
         this.props.route.params.SeleccionProducto(pk, name);
         this.props.navigation.navigate("Detalle de Venta");

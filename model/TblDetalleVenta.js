@@ -14,14 +14,13 @@ class TblDetalleVenta extends Entity {
         Get: "TblDetalleVenta",
     }
 
-    PKVenta= "1"
-    FKEmpleado = "1"
-    FechaFactura= ""
-    DescuentoVenta= "0.000"
-    IVAVenta= ""
-    TotalVenta= ""
-    NombreCliente= "Alejandro Vazquez"
-    EstadoVenta= "1"
+        PKDetalleVenta = "1";
+        FKProducto = "1";
+        FKVenta = "1";
+        FKUnidadMedida = "1";
+        PKProducto = "1";
+        Cantidad = "1";
+        SubTotal = "100";
 
     TblProductos = {
         val: [],
@@ -29,7 +28,7 @@ class TblDetalleVenta extends Entity {
             if (this.FKProducto != "") {
                 const producto = new TblProductos();
 
-                return await producto.GetByProps("PKProducto", this.FKProducto);
+                return await producto.GetByPropsBuy("PKProducto", this.FKProducto);
             }else{
                 return this.TblProductos.val;
             }            

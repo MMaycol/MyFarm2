@@ -2,10 +2,10 @@
     {
         "PKVenta": "1",
         "FKEmpleado": "1",
-        "FechaFactura": "",
+        "FechaFactura": "12/09/2022",
         "DescuentoVenta": "0.000",
-        "IVAVenta": "",
-        "TotalVenta": "",
+        "IVAVenta": "10",
+        "TotalVenta": "100",
         "NombreCliente": "Sin definir",
         "EstadoVenta": "1"
     }
