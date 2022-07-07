@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, ScrollView, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, ScrollView, TextInput, Button } from 'react-native';
 
 
 //Componentes
@@ -14,8 +14,7 @@ class ProductosView extends React.Component {
         this.props = props;
         this.state = {
             isLoading: true,
-            Dataset: [],
-            selecct: this.props.route.params ?? false
+            Dataset: []
         }
 
         this.TblProductos = new TblProductos();
@@ -30,15 +29,18 @@ class ProductosView extends React.Component {
             Dataset: productos
         });
     }
-    SeleccionProducto = async (pk, name) => {
-        this.props.route.params.SeleccionProducto(pk, name);
-        this.props.navigation.navigate("Detalle de Compra");
-    }
 
     render() {
 
         return (<ScrollView style = {styles.CardStyles}>
-            <TextInput style = {styles.text_input}
+            <TouchableOpacity onPress={() => {
+                this.props.navigation.navigate("Nuevo Producto", { CargarProductos: this.CargarProductos });
+            }}
+            style = {styles.Button} >
+            <Text style = {styles.ButtonText}>Nuevo Producto</Text>
+          </TouchableOpacity>
+
+          <TextInput style = {styles.text_input}
             placeholder = 'Buscar productos'
             onChangeText = { val => this.CargarProductos(val)}></TextInput>
 
@@ -46,7 +48,7 @@ class ProductosView extends React.Component {
                 <ActivityIndicator /> :
                 this.state.Dataset.map(
                     c => <CardProductosView key = {c.PKProducto}
-                     data = { c } SeleccionProducto = { this.SeleccionProducto } selecct = {this.state.selecct} />
+                     data = { c } selecct = { false } />
                 )}
         </ScrollView> )
     }
@@ -68,5 +70,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#e0e0e0',
         borderRadius: 10
       },
+      Button: {
+        marginRight: 14,
+        marginLeft: 14,
+        marginTop: 24,
+        paddingTop: 10,
+        paddingBottom: 10,
+        backgroundColor: 'black',
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: 'white'
+    },
+    ButtonText: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 19
+      }
     
   });

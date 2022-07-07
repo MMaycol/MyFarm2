@@ -30,11 +30,6 @@ class UnidadMedidaView extends React.Component {
 
     }
 
-    SeleccionUnit = async (pk, name) => {
-        await this.props.route.params.SeleccionUnit(pk, name);
-        this.props.navigation.navigate("Detalle de Compra");
-    }
-
     render() {
 
         return (<ScrollView style={styles.CardStyles}>
@@ -46,7 +41,7 @@ class UnidadMedidaView extends React.Component {
                 <ActivityIndicator /> :
                 this.state.Dataset.map(
                     c => <CardUnidadMedidaView key = {c.PKUnidadMedida}
-                     data = { c } SeleccionUnit = { this.SeleccionUnit } />
+                     data = { c } />
                 )}
         </ScrollView> )
     }

@@ -94,7 +94,7 @@ Filt1  = async (param = (new TblDetalleCompra()))=>{
             }}
             style = {styles.Button} >
             <Text style = {styles.ButtonText}>Nueva Compra</Text>
-       </TouchableOpacity>
+          </TouchableOpacity>
 
        <TextInput style = {styles.text_input}
             placeholder = 'Buscar compra'
@@ -110,15 +110,17 @@ Filt1  = async (param = (new TblDetalleCompra()))=>{
                 )}
 
         
-            <BottomSheet
+          <BottomSheet
                     visible = {this.state.visible}
                     onBackButtonPress={this.toggleBottomNavigationView}
                     onBackdropPress = {this.toggleBottomNavigationView}>
 
                     <ScrollView style = {styles.bottomNavigationView}>
+
                      <View style = {styles.CardStyle}>
                      <Text style = {styles.Title}>Detalle de Compra</Text>
                      <Button color = {'#000'} onPress = {this.toggleBottomNavigationView} title = 'Regresar'></Button>
+
                         <View style = {{margin: 8}}>
                         <View style = {{padding: 4, borderWidth: 1, borderColor: '#000'}}>
                         {
@@ -128,6 +130,7 @@ Filt1  = async (param = (new TblDetalleCompra()))=>{
                                 </View>)
                             })
                         }
+
                         <Text style = {styles.Atribute}>Fecha compra: {this.state.fecha_compra} </Text>
                         <Text style = {styles.Atribute}>Iva: {this.state.iva_compra} </Text>
                         <Text style = {styles.Atribute}>Total: {this.state.total_compra} </Text>
@@ -172,7 +175,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         justifyContent: 'center'
     },
-        text_input: {
+    text_input: {
             height: 50,
             margin: 12,
             fontSize: 20,

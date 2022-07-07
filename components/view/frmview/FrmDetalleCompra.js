@@ -1,6 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { BottomSheet } from 'react-native-btr';
+
+import { CardProductosView } from '../../utility/CardProductosView';
+
 import { TblDetalleCompra } from '../../../model/TblDetalleCompra';
+import { TblProductos } from '../../../model/TblProducto';
+import { CatUnidadMedida } from '../../../model/CatUnidadMedida';
+import { CardUnidadMedidaView } from '../../utility/CardUnidadMedidaView';
 
 class FrmDetalleCompra extends React.Component {
     constructor(props) {
@@ -9,6 +16,10 @@ class FrmDetalleCompra extends React.Component {
         this.DetalleCompra = new TblDetalleCompra();
 
         this.state = {
+            options: "",
+            visible: false,
+            productos: [],
+            unit: [],
             PK: "",
             producto: "",
             precio: "",
@@ -18,23 +29,46 @@ class FrmDetalleCompra extends React.Component {
             unidad_de_medida: ""
         }
 
+        this.TblProductos = new TblProductos();
+        this.CatUnidadMedida = new CatUnidadMedida();
+
         this.NombreProducto = "";
         this.NUnidadMedida = "";
 
         this.GuardarDetalleCompra = this.props.route.params.GuardarDetalleCompra;
         this.Editar(this.props.route.params.Datos ?? null)
         this.flag = true;
+
+        this.CargarProductos();
+        this.CargarUnit();
+    }
+
+    CargarProductos = async (param = "") => {
+        const productos = await this.TblProductos.Get(param);
+
+        this.setState({
+            productos: productos
+        });
+    }
+
+    CargarUnit = async (param = "") => {
+        const unit = await this.CatUnidadMedida.Get(param);
+
+        this.setState({
+            unit: unit
+        });
+
     }
 
     Editar = async (obj = (new TblDetalleCompra())) => {
       
         if(obj != null) {
-            const a = await this.DetalleCompra.TblProductos.get();
-            const b = await this.DetalleCompra.CatUnidadMedia.get();
+            const a = await obj.TblProductos.get();
+            const b = await obj.CatUnidadMedia.get();
 
             const NameProduct = a.filter(i => i.PKProducto == obj.FKProducto);
             const NameUnit = b.filter(i => i.PKUnidadMedida == obj.FKUnidadMedida);
-
+            
             NameProduct.forEach(element => {
                 this.NombreProducto = element.NombreProducto;
             });
@@ -67,6 +101,7 @@ class FrmDetalleCompra extends React.Component {
     SeleccionProducto = async (Pk, Name) => {
     
         this.setState({
+            visible: !this.state.visible,
             PK: Pk,
             producto: Name
         });
@@ -76,6 +111,7 @@ class FrmDetalleCompra extends React.Component {
 
     SeleccionUnit = async (Pk, Name) => {
         this.setState({
+            visible: !this.state.visible,
             PKU: Pk,
             unidad_de_medida: Name
         });
@@ -92,6 +128,13 @@ class FrmDetalleCompra extends React.Component {
         this.DetalleCompra.Cantidad = val.toString();
         this.DetalleCompra.SubTotal = this.state.subtotal;
     }
+
+    toggleBottomNavigationView = (param = "") => {
+        this.setState({
+          options: param,
+          visible: !this.state.visible
+        })
+      }
 
     render() {
         return <View style = {styles.CardStyles}>
@@ -114,10 +157,7 @@ class FrmDetalleCompra extends React.Component {
             
             <Button color = {'#000'} title = "+" onPress= { async () => {
                 //Event seleccionar producto
-                this.props.navigation.navigate("Seleccionar Producto", {
-                    SeleccionProducto: this.SeleccionProducto ,
-                    selecct: true
-                });
+                this.toggleBottomNavigationView("producto");
             }} />
             </View>
 
@@ -141,9 +181,7 @@ class FrmDetalleCompra extends React.Component {
                 disabled />
                 <Button color={'#000'} title = "+" onPress= { async () => {
                 //Event seleccionar unidad de medida
-                this.props.navigation.navigate("Seleccionar Unit", {
-                    SeleccionUnit: this.SeleccionUnit
-                });
+                this.toggleBottomNavigationView("unit");
             }} />
             </View>
 
@@ -175,6 +213,52 @@ class FrmDetalleCompra extends React.Component {
                 this.props.navigation.navigate("Nueva Compra");
             }} />
             </View>
+
+            <BottomSheet
+                    visible = {this.state.visible}
+                    onBackButtonPress = {this.toggleBottomNavigationView}
+                    onBackdropPress = {this.toggleBottomNavigationView}>
+
+                <ScrollView style = {styles.bottomNavigationView}>
+                    <View style = {styles.CardStyle}>
+                     <Text style = {styles.Title}>Seleccionar producto</Text>
+                     <Button color = {'#000'} onPress = {this.toggleBottomNavigationView} title = 'Regresar'></Button>
+
+                    {
+                    this.state.options == "producto"?
+                     <TextInput style = {styles.text_input}
+                                placeholder = 'Buscar productos'
+                                onChangeText = { val => this.CargarProductos(val)}></TextInput> 
+                                : false
+                    }
+                    {
+                    this.state.options == "unit"?
+                    <TextInput style = {styles.text_input}
+                                placeholder = 'Buscar unidad de medida'
+                                onChangeText = { val => this.CargarProductos(val)}></TextInput>  
+                                : false
+                    }
+                    
+                    {
+                    this.state.options == "producto"?
+                    this.state.productos.map(
+                    c => <CardProductosView key = {c.PKProducto}
+                     data = { c } SeleccionProducto = { this.SeleccionProducto } selecct = { true } />
+                    ) : false
+                    }
+
+                    {
+                    this.state.options == "unit"?
+                    this.state.unit.map(
+                        c => <CardUnidadMedidaView key = {c.PKUnidadMedida}
+                         data = { c } SeleccionUnit = { this.SeleccionUnit } />
+                    ) : false
+                    }
+
+                    </View>
+
+                        </ScrollView>
+                    </BottomSheet>
         </View>;
     }
 
@@ -246,5 +330,22 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
-    }
+    },
+    bottomNavigationView: {
+        backgroundColor: '#fff',
+        width: '100%',
+        height: '100%',
+       
+      },
+      CardStyle: {
+        margin: 8
+    },
+    text_input: {
+            height: 50,
+            margin: 12,
+            fontSize: 20,
+            padding: 8,
+            backgroundColor: '#e0e0e0',
+            borderRadius: 10
+          }
 });

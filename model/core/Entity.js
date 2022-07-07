@@ -40,7 +40,7 @@ class Entity {
     }
 
     GetByProps = async (paramName, paramValue) => {
-        console.log(paramName, paramValue);
+        
         let Data = await this.TakeData();
         Data = Data.filter(ent => ent[paramName].toString().includes(paramValue.toString()));
 
